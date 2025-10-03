@@ -1,0 +1,88 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+#game-board {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+    max-width: 1300px;
+    margin: 20px auto;
+}
+
+.box {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #333;
+    margin: 4px;
+    cursor: pointer;
+    background-color: #e0e0e0;
+    
+    /* 文字を中央に配置するための設定 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+/* JavaScriptで追加するクラス */
+.box.win {
+    background-color: gold;
+    color: black;
+}
+
+.box.lose {
+    background-color: #aaa;
+    color: white;
+}
+
+/* 開封済みのボックスはクリックできないようにする */
+.box.revealed {
+    cursor: default;
+}
+
+#reset-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#history {
+    position: static;
+    width: 50%;
+    max-width: 800px;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 2px solid #888;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.08);
+    text-align: left;
+    margin: 20px auto;
+}
+
+#history-list {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 0;
+    margin: 8px 0 0 0;
+    list-style: none;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+#history-list li {
+    background: #eee;
+    border-radius: 4px;
+    padding: 4px 4px;
+    min-width: 16px;
+    text-align: center;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    flex-shrink: 0;
+}
