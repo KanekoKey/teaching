@@ -1,29 +1,46 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <title>あたりはどれ？</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <h1>あたりはどれ？</h1>
     <p>10個のボックスから1つだけある「あたり」を見つけよう！</p>
-    <div id="game-board"></div>
 
-    <div id="history">
-        <div id="stats">
-            <div>最大回数: <span id="max-try">0</span>
-            最小回数: <span id="min-try">0</span></div>
-            <div>平均回数: <span id="avg-try">0</span></div>
-            <div>履歴:</div>
-        </div>
-        <ul id="history-list"></ul>
+    <h2>線形探索(手動)</h2>
+    <div id="linear-game-board"></div>
+    <div id="linear-history">
+        <div>
+            最大回数: <span class="max-try">0</span>
+            最小回数: <span class="min-try">0</span></div>
+        <div>平均回数: <span class="avg-try">0</span></div>
+        <div>履歴:</div>
+        <ul class="history-list"></ul>
     </div>
-    
-    <button id="reset-button">もう一度</button>
+    <button id="linear-reset-button">もう一度</button>
+
+    <h2>線形探索(手動)</h2>
+    <div id="binary-game-board"></div>
+    <div id="binary-history">
+        <div>
+            最大回数: <span class="max-try">0</span>
+            最小回数: <span class="min-try">0</span></div>
+        <div>平均回数: <span class="avg-try">0</span></div>
+        <div>履歴:</div>
+        <ul class="history-list"></ul>
+    </div>
+    <button id="binary-reset-button">もう一度</button>
+
+    <h2>線形探索(自動)</h2>
+    <h2>二分探索(自動)</h2>
 
     <script src="script.js"></script>
 
 </body>
+
 </html>

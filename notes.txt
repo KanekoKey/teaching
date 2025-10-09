@@ -1,0 +1,24 @@
+# 開発中のメモ
+
+## ブランチ名
+feature/ 機能追加  
+fix/ バグ修正
+hotfix/ 緊急修正  
+docs/ ドキュメント関連  
+refactor/ ファイル整理
+
+
+## TODO
+### 思いついたタスクは書いて整理する
+add-binary-serch
+二分探査の部分を作る
+  up or down
+
+
+変数名を分かりやすくする
+コメントを分かりやすくする
+ゲーム名を変える
+game
+history->score
+
+線形探索、二分探索を行う
