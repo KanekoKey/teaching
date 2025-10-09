@@ -3,7 +3,7 @@ body {
     text-align: center;
 }
 
-#game-board {
+#linear-game-board {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -19,7 +19,7 @@ body {
     margin: 4px;
     cursor: pointer;
     background-color: #e0e0e0;
-    
+
     /* 文字を中央に配置するための設定 */
     display: flex;
     justify-content: center;
@@ -45,13 +45,7 @@ body {
     cursor: default;
 }
 
-#reset-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#history {
+#linear-history {
     position: static;
     width: 50%;
     max-width: 800px;
@@ -59,12 +53,12 @@ body {
     background: #f9f9f9;
     border: 2px solid #888;
     border-radius: 8px;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.08);
     text-align: left;
     margin: 20px auto;
 }
 
-#history-list {
+.history-list {
     display: flex;
     flex-direction: row;
     gap: 8px;
@@ -76,7 +70,7 @@ body {
     max-width: 100%;
 }
 
-#history-list li {
+.history-list li {
     background: #eee;
     border-radius: 4px;
     padding: 4px 4px;
@@ -85,4 +79,10 @@ body {
     border: 1px solid #ccc;
     font-size: 14px;
     flex-shrink: 0;
+}
+
+#linear-reset-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
 }
