@@ -14,7 +14,7 @@ class Game {
         }
 
         this.historyList = this.history.querySelector(".history-list");
-        
+
         // ゲームの状態を管理する変数
         this.boxCount = 10;
         this.winningBoxIndex = 0;
@@ -25,7 +25,7 @@ class Game {
 
         // イベントリスナーを設定 (this.setupGameを束縛)
         this.resetButton.addEventListener("click", this.setupGame.bind(this));
-        
+
         // 最初のゲームを開始
         this.setupGame();
     }
@@ -55,7 +55,7 @@ class Game {
                     box.classList.add("win");
                     this.endGame();
                 } else {
-                    box.textContent = "外れ";
+                    box.textContent = this.getHintText(i); 
                     box.classList.add("lose");
                 }
             };
@@ -63,6 +63,10 @@ class Game {
             box.addEventListener("click", handleClick);
             this.gameBoard.appendChild(box);
         }
+    }
+    getHintText(clickedIndex) {
+        // 通常のゲームでは、常に "外れ" を返す
+        return "外れ";
     }
 
     // --- ゲーム終了時の処理 ---
@@ -72,7 +76,7 @@ class Game {
         this.maxTryCount = Math.max(this.maxTryCount, this.tryCount);
 
         this.resetButton.disabled = false;
-        
+
         // すべてのボックスをクリック不可に
         this.gameBoard.querySelectorAll(".box").forEach((b) => {
             if (!b.classList.contains("revealed")) {
@@ -80,11 +84,8 @@ class Game {
             }
         });
 
-        const li = document.createElement("li");
-        li.textContent = `${this.tryCount}回`;
-        this.historyList.insertBefore(li, this.historyList.firstChild);
-
         this.updateStats();
+        this.updateHistoryList();
     }
 
     // --- 統計情報を更新 ---
@@ -102,11 +103,29 @@ class Game {
         const count = this.historyList.children.length;
         this.history.querySelector(".avg-try").textContent = count ? (sum / count).toFixed(2) : 0;
     }
+
+    updateHistoryList() {
+        const li = document.createElement("li");
+        li.textContent = `${this.tryCount}回`;
+        this.historyList.insertBefore(li, this.historyList.firstChild);
+    }
+}
+
+class BinaryGame extends Game {
+    // getHintText メソッドだけをオーバーライドする
+    getHintText(clickedIndex) {
+        // クリックした場所(clickedIndex)と正解(winningBoxIndex)を比較
+        if (clickedIndex < this.winningBoxIndex) {
+            return "もっと右 ▶";
+        } else {
+            return "もっと左 ◀";
+        }
+    }
 }
 
 // --- ゲームのインスタンスを生成 ---
 // 1つ目のゲームを作成
-new Game("linear-game-board", "linear-history", "linear-reset-button");
+linearGame = new Game("linear-game-board", "linear-history", "linear-reset-button");
 
 // 2つ目のゲームを作成
-new Game("binary-game-board", "binary-history", "binary-reset-button");
+binaryGame = new BinaryGame("binary-game-board", "binary-history", "binary-reset-button");
