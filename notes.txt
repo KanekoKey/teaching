@@ -12,9 +12,6 @@ refactor/ ファイル整理
 ### 思いついたタスクは書いて整理する
 add-binary-serch
 二分探査の部分を作る
-  複製する
-  　関数化する
-    html css js
   up or down
 
 
