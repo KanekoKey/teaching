@@ -1,7 +1,7 @@
 // --- あたりボックスゲーム (クラス版) ---
 class Game {
     // ゲームの初期設定を行う部分
-    constructor(gameBoardId, historyId, resetId) {
+    constructor(gameBoardId, historyId, resetId, boxCount) {
         // 各要素を取得して、this.変数に格納
         this.gameBoard = document.getElementById(gameBoardId);
         this.history = document.getElementById(historyId);
@@ -16,7 +16,7 @@ class Game {
         this.historyList = this.history.querySelector(".history-list");
 
         // ゲームの状態を管理する変数
-        this.boxCount = 10;
+        this.boxCount = boxCount;
         this.winningBoxIndex = 0;
         this.playCount = 0;
         this.tryCount = 0;
@@ -116,16 +116,16 @@ class BinaryGame extends Game {
     getHintText(clickedIndex) {
         // クリックした場所(clickedIndex)と正解(winningBoxIndex)を比較
         if (clickedIndex < this.winningBoxIndex) {
-            return "もっと右 ▶";
+            return "もっと後ろ ▶";
         } else {
-            return "もっと左 ◀";
+            return "もっと前 ◀";
         }
     }
 }
 
 // --- ゲームのインスタンスを生成 ---
 // 1つ目のゲームを作成
-linearGame = new Game("linear-game-board", "linear-history", "linear-reset-button");
+linearGame = new Game("linear-game-board", "linear-history", "linear-reset-button", 10);
 
 // 2つ目のゲームを作成
-binaryGame = new BinaryGame("binary-game-board", "binary-history", "binary-reset-button");
+binaryGame = new Game("binary-game-board", "binary-history", "binary-reset-button", 100);
