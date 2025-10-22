@@ -1,0 +1,45 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    padding-top: 50px;
+}
+
+#timer-display {
+    font-size: 10em; /* 数字を大きく */
+    font-weight: bold;
+    color: #333;
+    margin: 40px 0;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* ボタン同士の間隔 */
+}
+
+.btn {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    color: white;
+}
+
+#startBtn {
+    background-color: #28a745; /* 緑 */
+}
+
+#stopBtn {
+    background-color: #dc3545; /* 赤 */
+}
+
+#resetBtn {
+    background-color: #6c757d; /* グレー */
+}
+
+.btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
