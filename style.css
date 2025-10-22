@@ -94,3 +94,9 @@ body {
     display: flex;
     justify-content: space-between;
 }
+
+.h0 {
+    font-size: 64px;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+}
