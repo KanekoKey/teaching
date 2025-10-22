@@ -10,9 +10,15 @@ refactor/ ファイル整理
 
 ## TODO
 ### 思いついたタスクは書いて整理する
-add-binary-serch
+Scoreのみを表示させる
+タイマー
+
+「探索」解説ページ
+
 二分探査の部分を作る
   up or down
+
+線形探索、二分探索を行う部分を作る
 
 
 変数名を分かりやすくする
@@ -20,5 +26,3 @@ add-binary-serch
 ゲーム名を変える
 game
 history->score
-
-線形探索、二分探索を行う

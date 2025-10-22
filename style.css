@@ -3,7 +3,7 @@ body {
     text-align: center;
 }
 
-#linear-game-board,#binary-game-board {
+.game-board {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -45,7 +45,7 @@ body {
     cursor: default;
 }
 
-#linear-history,#binary-history {
+.history {
     position: static;
     width: 50%;
     max-width: 800px;
@@ -81,8 +81,16 @@ body {
     flex-shrink: 0;
 }
 
-#linear-reset-button,#binary-reset-button {
+.btn {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+}
+
+.footer {
+    width: 90%;
+    max-width: 1300;
+    margin: 100px auto;
+    display: flex;
+    justify-content: space-between;
 }
