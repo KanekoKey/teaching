@@ -45,28 +45,33 @@ class Game {
             box.classList.add("box");
             box.textContent = i + 1;
 
-            // ボックスがクリックされた時の処理
-            const handleClick = () => {
-                if (box.classList.contains("revealed")) {
-                    return;
-                }
-                box.classList.add("revealed");
-                this.tryCount++;
-
-                if (i === this.winningBoxIndex) {
-                    box.textContent = "あたり";
-                    box.classList.add("win");
-                    this.endGame();
-                } else {
-                    box.textContent = this.getHintText(i);
-                    box.classList.add("lose");
-                }
-            };
-
-            box.addEventListener("click", handleClick);
+            box.addEventListener("click", this.handleBoxClick.bind(this, i, box));
             this.gameBoard.appendChild(box);
         }
     }
+
+    // (setupGame 内にあった handleClick のロジックを移動)
+    handleBoxClick(i, box) {
+        // すでにめくられている場合は何もしない
+        if (box.classList.contains("revealed")) {
+            return;
+        }
+        
+        box.classList.add("revealed");
+        this.tryCount++; // 試行回数を増やす
+
+        if (i === this.winningBoxIndex) {
+            // あたりの場合
+            box.textContent = "あたり";
+            box.classList.add("win");
+            this.endGame(); // ゲーム終了処理
+        } else {
+            // はずれの場合
+            box.textContent = this.getHintText(i);
+            box.classList.add("lose");
+        }
+    }
+
     getHintText(clickedIndex) {
         // 通常のゲームでは、常に "外れ" を返す
         return "外れ";
@@ -123,10 +128,100 @@ class BinaryGame extends Game {
     }
 }
 
+// --- 線形探索のコード ---
+class LinearSearchGame extends Game {
+
+    constructor(gameBoardId, historyId, gameInfoId, boxCount) {
+        // 親クラス(Game)の constructor を実行
+        super(gameBoardId, historyId, gameInfoId, boxCount);
+
+        // HTMLで追加した「自動で探す」ボタンを取得
+        this.autoSearchButton = this.gameInfo.querySelector(".linear-button");
+        if (this.autoSearchButton) {
+            // ボタンがクリックされたら startAutoSearch メソッドを実行
+            this.autoSearchButton.addEventListener("click", this.startAutoSearch.bind(this));
+        }
+    }
+
+    // --- setupGame を上書き(オーバーライド) ---
+    // (自動探索デモ用に、ボックスのクリックを無効化する)
+    setupGame() {
+        // 親の setupGame のロジックをほぼコピー
+        this.gameBoard.innerHTML = "";
+        this.winningBoxIndex = Math.floor(Math.random() * this.boxCount);
+        this.resetButton.disabled = true;
+        this.tryCount = 0;
+
+        // 自動探索ボタンを有効化
+        if (this.autoSearchButton) {
+            this.autoSearchButton.disabled = false;
+        }
+
+        for (let i = 0; i < this.boxCount; i++) {
+            const box = document.createElement("div");
+            box.classList.add("box");
+            box.textContent = i + 1;
+            
+            // ★★★ 親と違う点 ★★★
+            // box.addEventListener を実行しない
+            // これにより、個別のボックスをクリックできなくする
+            
+            this.gameBoard.appendChild(box);
+        }
+    }
+
+    // --- 自動探索を実行するメソッド (async) ---
+    async startAutoSearch() {
+        // 探索中はリセットボタンと自動探索ボタンを無効化
+        this.resetButton.disabled = true;
+        if (this.autoSearchButton) {
+            this.autoSearchButton.disabled = true;
+        }
+
+        const boxes = this.gameBoard.children;
+        let found = false;
+
+        for (let i = 0; i < this.boxCount; i++) {
+            const box = boxes[i];
+            
+            // 親クラスの「ボックスをめくる」処理を呼び出す
+            this.handleBoxClick(i, box);
+
+            // もし「あたり」なら found を true にする
+            if (i === this.winningBoxIndex) {
+                found = true;
+            }
+
+            // --- ここで遅延を発生させる ---
+            // 300ミリ秒 (0.3秒) 待つ
+            await new Promise(resolve => setTimeout(resolve, 300));
+
+            // 「あたり」を見つけたらループを抜ける
+            if (found) {
+                break;
+            }
+        }
+
+        // ループが終わったらリセットボタンだけ有効化
+        this.resetButton.disabled = false;
+    }
+
+    // --- endGame も上書き ---
+    // (自動探索ボタンを無効化するため)
+    endGame() {
+        super.endGame(); // まず親の endGame を実行
+        if (this.autoSearchButton) {
+            this.autoSearchButton.disabled = true;
+        }
+    }
+}
+
 // --- ゲームのインスタンスを生成 ---
 const pageId = document.body.id;
 if (pageId === "search1") {
-    linearGame = new Game("linear-game-board", "linear-history", "linear-game-info", 10);
+    game1 = new Game("game-board-1", "history-1", "game-info-1", 15);
 } else if (pageId === "search2") {
     binaryGame = new Game("binary-game-board", "binary-history", "binary-game-info", 100);
+} else if (pageId === "search4") {
+    game3 = new LinearSearchGame("game-board-3", "history-3", "game-info-3", 15);
 }
