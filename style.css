@@ -1,13 +1,13 @@
 body {
     font-family: sans-serif;
-    text-align: center;
+    margin-right: 10%;
+    margin-left: 10%;
 }
 
 .game-board {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 90%;
     max-width: 1250px;
     margin: 20px auto;
 }
@@ -46,7 +46,6 @@ body {
 }
 
 .game-info {
-    width: 90%;
     max-width: 1300;
     display: flex;
     justify-content: center;
@@ -105,8 +104,6 @@ body {
 }
 
 .footer {
-    width: 90%;
-    max-width: 1300;
     margin: 100px auto;
     display: flex;
     justify-content: space-between;
@@ -115,5 +112,12 @@ body {
 .h0 {
     font-size: 64px;
     font-weight: bold;
-    margin: 20px 0 10px 0;
+    margin: 20px 0 0 0;
+}
+
+.content-block {
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); 
 }
