@@ -1,25 +1,28 @@
 // --- あたりボックスゲーム (クラス版) ---
 class Game {
     // ゲームの初期設定を行う部分
-    constructor(gameBoardId, historyId, resetId, boxCount) {
+    constructor(gameBoardId, historyId, gameInfoId, boxCount) {
         // 各要素を取得して、this.変数に格納
         this.gameBoard = document.getElementById(gameBoardId);
         this.history = document.getElementById(historyId);
-        this.resetButton = document.getElementById(resetId);
+        this.gameInfo = document.getElementById(gameInfoId);
+        this.gameScore = this.gameInfo.querySelector(".game-score");
+        this.resetButton = this.gameInfo.querySelector(".reset-button");
 
         // ゲームが見つからなかったら処理を中断
-        if (!this.gameBoard || !this.history || !this.resetButton) {
+        if (!this.gameBoard || !this.history || !this.gameInfo) {
             console.error("ゲームのHTML要素が見つかりません。IDを確認してください:", gameBoardId);
             return;
         }
 
         this.historyList = this.history.querySelector(".history-list");
 
-        // ゲームの状態を管理する変数
+        // ゲームの状態を管理する変数W
         this.boxCount = boxCount;
         this.winningBoxIndex = 0;
         this.playCount = 0;
         this.tryCount = 0;
+        this.totalScore = 0;
         this.minTryCount = Infinity;
         this.maxTryCount = 0;
 
@@ -55,7 +58,7 @@ class Game {
                     box.classList.add("win");
                     this.endGame();
                 } else {
-                    box.textContent = this.getHintText(i); 
+                    box.textContent = this.getHintText(i);
                     box.classList.add("lose");
                 }
             };
@@ -72,6 +75,7 @@ class Game {
     // --- ゲーム終了時の処理 ---
     endGame() {
         this.playCount++;
+        this.totalScore += this.tryCount;
         this.minTryCount = Math.min(this.minTryCount, this.tryCount);
         this.maxTryCount = Math.max(this.maxTryCount, this.tryCount);
 
@@ -84,29 +88,25 @@ class Game {
             }
         });
 
+        this.updateScore();
         this.updateStats();
         this.updateHistoryList();
+    }
+
+    updateScore() {
+        this.gameScore.textContent = `Score: ${this.tryCount}`;
     }
 
     // --- 統計情報を更新 ---
     updateStats() {
         this.history.querySelector(".max-try").textContent = this.maxTryCount;
         this.history.querySelector(".min-try").textContent = this.minTryCount === Infinity ? 0 : this.minTryCount;
-
-        let sum = 0;
-        this.historyList.querySelectorAll("li").forEach(li => {
-            const n = parseInt(li.textContent);
-            if (!isNaN(n)) {
-                sum += n;
-            }
-        });
-        const count = this.historyList.children.length;
-        this.history.querySelector(".avg-try").textContent = count ? (sum / count).toFixed(2) : 0;
+        this.history.querySelector(".avg-try").textContent = this.totalScore ? (this.totalScore / this.playCount).toFixed(2) : 0;
     }
 
     updateHistoryList() {
         const li = document.createElement("li");
-        li.textContent = `${this.tryCount}回`;
+        li.textContent = `Score: ${this.tryCount}`;
         this.historyList.insertBefore(li, this.historyList.firstChild);
     }
 }
@@ -124,8 +124,9 @@ class BinaryGame extends Game {
 }
 
 // --- ゲームのインスタンスを生成 ---
-// 1つ目のゲームを作成
-linearGame = new Game("linear-game-board", "linear-history", "linear-reset-button", 10);
-
-// 2つ目のゲームを作成
-binaryGame = new Game("binary-game-board", "binary-history", "binary-reset-button", 100);
+const pageId = document.body.id;
+if (pageId === "search1") {
+    linearGame = new Game("linear-game-board", "linear-history", "linear-game-info", 10);
+} else if (pageId === "search2") {
+    binaryGame = new Game("binary-game-board", "binary-history", "binary-game-info", 100);
+}
