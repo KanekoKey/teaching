@@ -7,19 +7,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body id="search2">
+<body id="search4">
 
-    <h1>あたりはどれ？(その2)</h1>
-    <p>100個のボックスから1つだけある「あたり」を見つけよう！小さいスコアを目指そう！</p>
+    <div class="content-block">
+        <div class="h0">【線形探索】</div>
+        <h2>　　端から順に目的の値(探索値)を探し出すアルゴリズム</h2>
+    </div>
 
-    <div id="binary-game-board" class="game-board"></div>
+    <div id="game-board-3" class="game-board"></div>
 
-    <btn id="binary-game-info" class="game-info">
+    <btn id="game-info-3" class="game-info">
         <button class="game-score">Score: 0</button>
-        <button class="reset-button">もう一度</button>
+        <button class="btn linear-button">線形探索実行</button>
+        <button class="btn reset-button">もう一度</button>
+        </div>
     </btn>
 
-    <div id="binary-history" class="history">
+    <div id="history-3" class="history">
         <details>
             <summary>スコア詳細</summary>
             <div>
@@ -32,8 +36,8 @@
     </div>
 
     <div class="footer">
-        <button onclick="location.href='search1.html'" class="btn">前ページ</button>
-        <button onclick="location.href='search3.html'" class="btn">次ページ</button>
+        <button onclick="location.href='search3.html'" class="btn">前ページ</button>
+        <button onclick="location.href='search5.html'" class="btn">次ページ</button>
     </div>
 
     <script src="script.js"></script>
