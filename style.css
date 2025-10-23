@@ -8,7 +8,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     width: 90%;
-    max-width: 1300px;
+    max-width: 1250px;
     margin: 20px auto;
 }
 
@@ -43,6 +43,23 @@ body {
 /* 開封済みのボックスはクリックできないようにする */
 .box.revealed {
     cursor: default;
+}
+
+.game-info {
+    width: 90%;
+    max-width: 1300;
+    display: flex;
+    justify-content: center;
+}
+
+.game-score 
+{
+    padding: 10px 20px;
+    font-size: 32px;
+    cursor: default;
+    display: inline-block;
+    border: none;
+    background-color: #ffffff;
 }
 
 .history {
@@ -81,7 +98,7 @@ body {
     flex-shrink: 0;
 }
 
-.btn {
+.btn, .reset-button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;

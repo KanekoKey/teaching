@@ -7,21 +7,29 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body id="search1">
 
     <h1>あたりはどれ？</h1>
     <p>10個のボックスから1つだけある「あたり」を見つけよう！</p>
 
     <div id="linear-game-board" class="game-board"></div>
+
+    <btn id="linear-game-info" class="game-info">
+        <button class="game-score">Score: 0</button>
+        <button class="reset-button">もう一度</button>
+    </btn>
+
     <div id="linear-history" class="history">
-        <div>
-            最大回数: <span class="max-try">0</span>
-            最小回数: <span class="min-try">0</span></div>
-        <div>平均回数: <span class="avg-try">0</span></div>
-        <div>履歴:</div>
-        <ul class="history-list"></ul>
+        <details>
+            <summary></summary>
+            <div>
+                　最大スコア: <span class="max-try">0</span>
+                　最小スコア: <span class="min-try">0</span>
+                　平均スコア: <span class="avg-try">0</span></div>
+            <div>　スコア履歴:</div>
+            <ul class="history-list"></ul>
+        </details>
     </div>
-    <button id="linear-reset-button" class="btn">もう一度</button>
 
     <div class="footer">
         <button disabled class="btn">前ページ</button>
@@ -29,7 +37,7 @@
     </div>
 
     <script src="script.js"></script>
-    
+
 </body>
 
 </html>
