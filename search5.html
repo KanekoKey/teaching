@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>探索</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="search5">
+
+    <div class="content-block">
+        <div class="h0">【二分探索】</div>
+        <h2>　　探索範囲を半分に狭めることを繰り返して探索値を絞り込んでいくアルゴリズム</h2>
+    </div>
+
+    <div class="text-image" style="margin-top: 50px;">
+        <div>
+            <h3>二分探索の方法</h3>
+            <p>1. 探索範囲の中央値と探索値を比較する</p>
+            <p>2-A. 探索値が中央値より小さい場合</p>
+            <p>　　->中央値から大きい部分を除外する</p>
+            <p>2-B. 探索値が中央値より大きい場合</p>
+            <p>　　->中央値から小さい部分を除外する</p>
+            <p>3. 以上を当たるまで繰り返す</p>
+        </div>
+        <div>
+            <img src="img_binarySearch.svg" width="30%">
+        </div>
+    </div>
+
+    <h3 style="margin-top: 50px;">二分探索が行われる様子を見てみよう</h3>
+    <div id="game-board-4" class="game-board"></div>
+
+    <btn id="game-info-4" class="game-info">
+        <button class="game-score">Score: 0</button>
+        <button class="btn binary-button">二分探索実行</button>
+        <button class="btn reset-button">もう一度</button>
+        </div>
+    </btn>
+
+    <div id="history-4" class="history">
+        <details>
+            <summary>スコア詳細</summary>
+            <div>
+                　最大スコア: <span class="max-try">0</span>
+                　最小スコア: <span class="min-try">0</span>
+                　平均スコア: <span class="avg-try">0</span></div>
+            <div>　スコア履歴:</div>
+            <ul class="history-list"></ul>
+        </details>
+    </div>
+
+    <div class="footer">
+        <button onclick="location.href='search4.html'" class="btn">前ページ</button>
+        <button disabled class="btn">次ページ</button>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
