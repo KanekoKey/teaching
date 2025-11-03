@@ -257,6 +257,24 @@ class BinarySearchGame extends BinaryGame { // ★GameではなくBinaryGameを�
         }
     }
 
+    // --- ★ここから追加★ ---
+    /**
+     * 指定された範囲のボックスを「除外」としてマークするヘルパーメソッド
+     * @param {number} startIndex - 除外開始インデックス
+     * @param {number} endIndex - 除外終了インデックス
+     * @param {HTMLCollection} boxes - ボックスのリスト
+     */
+    _markExcludedRange(startIndex, endIndex, boxes) {
+        for (let i = startIndex; i <= endIndex; i++) {
+            const box = boxes[i];
+            // まだめくられていないボックス（＝数字のままのボックス）だけを対象
+            if (box && !box.classList.contains("revealed")) {
+                box.classList.add("excluded"); // グレーにするCSSクラス
+                box.classList.add("revealed"); // クリック済みとして扱う
+            }
+        }
+    }
+
     // --- 自動二分探索を実行するメソッド (async) ---
     async startAutoSearch() {
         // 探索中はリセットボタンと自動探索ボタンを無効化
@@ -281,10 +299,6 @@ class BinarySearchGame extends BinaryGame { // ★GameではなくBinaryGameを�
             // 親クラスの「ボックスをめくる」処理を呼び出す
             this.handleBoxClick(mid, box);
 
-            // --- ここで遅延を発生させる ---
-            // 二分探索は飛ぶので、ゆっくり 0.8秒 待つ
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
             // 当たったかどうかを判定 (endGameが呼ばれるとresetButtonが有効になる)
             if (this.resetButton.disabled === false) {
                 break; // 当たったのでループ終了
@@ -293,9 +307,21 @@ class BinarySearchGame extends BinaryGame { // ★GameではなくBinaryGameを�
             // --- 当たってない場合、ヒントに基づき範囲を狭める ---
             if (mid < this.winningBoxIndex) {
                 // 「もっと後ろ」の場合
-                low = mid + 1; // 範囲の下限を mid の次 にする
+                this._markExcludedRange(low, mid - 1, boxes);
             } else {
                 // 「もっと前」の場合
+                this._markExcludedRange(mid + 1, high, boxes);
+            }
+
+            // 除外処理が画面に反映された状態で、1秒待機
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // 待機が終わったら、次のループのために範囲を更新
+            if (mid < this.winningBoxIndex) {
+                // 「もっと後ろ」 (▶) の場合
+                low = mid + 1; // 範囲の下限を mid の次 にする
+            } else {
+                // 「もっと前」 (◀) の場合
                 high = mid - 1; // 範囲の上限を mid の前 にする
             }
         }
