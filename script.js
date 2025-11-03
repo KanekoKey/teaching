@@ -121,9 +121,9 @@ class BinaryGame extends Game {
     getHintText(clickedIndex) {
         // クリックした場所(clickedIndex)と正解(winningBoxIndex)を比較
         if (clickedIndex < this.winningBoxIndex) {
-            return "もっと大きい ▶";
+            return "▶";
         } else {
-            return "もっと小さい ◀";
+            return "◀";
         }
     }
 }

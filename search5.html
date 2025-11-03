@@ -14,22 +14,7 @@
         <h2>　　探索範囲を半分に狭めることを繰り返して探索値を絞り込んでいくアルゴリズム</h2>
     </div>
 
-    <div class="text-image" style="margin-top: 50px;">
-        <div>
-            <h3>二分探索の方法</h3>
-            <p>1. 探索範囲の中央値と探索値を比較する</p>
-            <p>2-A. 探索値が中央値より小さい場合</p>
-            <p>　　->中央値から大きい部分を除外する</p>
-            <p>2-B. 探索値が中央値より大きい場合</p>
-            <p>　　->中央値から小さい部分を除外する</p>
-            <p>3. 以上を当たるまで繰り返す</p>
-        </div>
-        <div>
-            <img src="img_binarySearch.svg" width="30%">
-        </div>
-    </div>
-
-    <h3 style="margin-top: 50px;">二分探索が行われる様子を見てみよう</h3>
+    <h3 style="margin-top: 50px;">まずは、二分探索が行われる様子を見てみよう</h3>
     <div id="game-board-4" class="game-board"></div>
 
     <btn id="game-info-4" class="game-info">
@@ -49,6 +34,19 @@
             <div>　スコア履歴:</div>
             <ul class="history-list"></ul>
         </details>
+    </div>
+
+    <div style="margin-top: 50px;">
+        <div>
+            <h3>二分探索の方法</h3>
+            <p>1. 探索範囲の中央値と探索値を比較する</p>
+            <p>2-A. 探索値が中央値より小さい場合　->　中央値から大きい部分を除外する</ｐ>
+            <p>2-B. 探索値が中央値より大きい場合　->　中央値から小さい部分を除外する</p>
+            <p>3. 以上を当たるまで繰り返す</p>
+        </div>
+        <div>
+            <img src="img_binarySearch.svg" width="30%">
+        </div>
     </div>
 
     <div class="footer">
