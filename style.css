@@ -45,6 +45,12 @@ body {
     cursor: default;
 }
 
+.box.excluded {
+  background-color: #333; /* グレーの背景色 */
+  color: #333; /* 文字色も薄く */
+  opacity: 0.8; /* 少しだけ透明にする */
+}
+
 .game-info {
     max-width: 1300;
     display: flex;
@@ -126,4 +132,30 @@ body {
     display: flex;
     justify-content: left;
     gap: 100px;
+}
+
+/* 二分探索の説明全体を囲うラッパー */
+.search-steps {
+  display: flex;
+  flex-direction: column; /* ステップを縦に並べる */
+  gap: 10px; /* 各ステップの間隔 */
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+/* 各ステップ（行）のスタイル */
+.step-row {
+  display: flex;
+  flex-wrap: nowrap; /* ボックスを折り返さない */
+  gap: 5px; /* ボックス間の隙間 */
+}
+
+/* ステップの説明文（任意） */
+.step-row-label {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5px;
 }

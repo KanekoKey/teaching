@@ -14,22 +14,7 @@
         <h2>　　探索範囲を半分に狭めることを繰り返して探索値を絞り込んでいくアルゴリズム</h2>
     </div>
 
-    <div class="text-image" style="margin-top: 50px;">
-        <div>
-            <h3>二分探索の方法</h3>
-            <p>1. 探索範囲の中央値と探索値を比較する</p>
-            <p>2-A. 探索値が中央値より小さい場合</p>
-            <p>　　->中央値から大きい部分を除外する</p>
-            <p>2-B. 探索値が中央値より大きい場合</p>
-            <p>　　->中央値から小さい部分を除外する</p>
-            <p>3. 以上を当たるまで繰り返す</p>
-        </div>
-        <div>
-            <img src="img_binarySearch.svg" width="30%">
-        </div>
-    </div>
-
-    <h3 style="margin-top: 50px;">二分探索が行われる様子を見てみよう</h3>
+    <h3 style="margin-top: 50px;">まずは、二分探索が行われる様子を見てみよう</h3>
     <div id="game-board-4" class="game-board"></div>
 
     <btn id="game-info-4" class="game-info">
@@ -51,6 +36,175 @@
         </details>
     </div>
 
+    <div style="margin-top: 50px;">
+        <div>
+            <h3>二分探索の方法</h3>
+            <p>1. 探索範囲の中央値と探索値を比較する</p>
+            <p>2-A. 探索値が中央値より小さい場合　->　中央値から大きい部分を除外する</ｐ>
+            <p>2-B. 探索値が中央値より大きい場合　->　中央値から小さい部分を除外する</p>
+            <p>3. 以上を当たるまで繰り返す</p>
+        </div>
+        <div>
+            <!-- <img src="img_binarySearch.svg" width="30%"> -->
+        </div>
+    </div>
+
+<div class="search-steps">
+
+  <div>
+    <div class="step-row-label">1. 最初の状態 (範囲: 1〜15)</div>
+    <div class="step-row">
+      <div class="box">1</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+      <div class="box">4</div>
+      <div class="box">5</div>
+      <div class="box">6</div>
+      <div class="box">7</div>
+      <div class="box">8</div>
+      <div class="box">9</div>
+      <div class="box">10</div>
+      <div class="box">11</div>
+      <div class="box">12</div>
+      <div class="box">13</div>
+      <div class="box">14</div>
+      <div class="box">15</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="step-row-label">2. 真ん中(8)を選択 → ヒント「▶」 (もっと後ろ)</div>
+    <div class="step-row">
+      <div class="box">1</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+      <div class="box">4</div>
+      <div class="box">5</div>
+      <div class="box">6</div>
+      <div class="box">7</div>
+      <div class="box revealed lose">▶</div> <div class="box">9</div>
+      <div class="box">10</div>
+      <div class="box">11</div>
+      <div class="box">12</div>
+      <div class="box">13</div>
+      <div class="box">14</div>
+      <div class="box">15</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="step-row-label">3. 範囲(1〜7)を除外。 (次の範囲: 9〜15)</div>
+    <div class="step-row">
+      <div class="box revealed excluded">1</div> <div class="box revealed excluded">2</div> <div class="box revealed excluded">3</div> <div class="box revealed excluded">4</div> <div class="box revealed excluded">5</div> <div class="box revealed excluded">6</div> <div class="box revealed excluded">7</div> <div class="box revealed lose">▶</div>
+      <div class="box">9</div>
+      <div class="box">10</div>
+      <div class="box">11</div>
+      <div class="box">12</div>
+      <div class="box">13</div>
+      <div class="box">14</div>
+      <div class="box">15</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="step-row-label">4. 真ん中(12)を選択 → ヒント「◀」 (もっと前)</div>
+    <div class="step-row">
+      <div class="box revealed excluded">1</div>
+      <div class="box revealed excluded">2</div>
+      <div class="box revealed excluded">3</div>
+      <div class="box revealed excluded">4</div>
+      <div class="box revealed excluded">5</div>
+      <div class="box revealed excluded">6</div>
+      <div class="box revealed excluded">7</div>
+      <div class="box revealed lose">▶</div>
+      <div class="box">9</div>
+      <div class="box">10</div>
+      <div class="box">11</div>
+      <div class="box revealed lose">◀</div> <div class="box">13</div>
+      <div class="box">14</div>
+      <div class="box">15</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="step-row-label">5. 範囲(13〜15)を除外。 (次の範囲: 9〜11)</div>
+    <div class="step-row">
+      <div class="box revealed excluded">1</div>
+      <div class="box revealed excluded">2</div>
+      <div class="box revealed excluded">3</div>
+      <div class="box revealed excluded">4</div>
+      <div class="box revealed excluded">5</div>
+      <div class="box revealed excluded">6</div>
+      <div class="box revealed excluded">7</div>
+      <div class="box revealed lose">▶</div>
+      <div class="box">9</div>
+      <div class="box">10</div>
+      <div class="box">11</div>
+      <div class="box revealed lose">◀</div>
+      <div class="box revealed excluded">13</div> <div class="box revealed excluded">14</div> <div class="box revealed excluded">15</div> </div>
+  </div>
+
+  <div>
+    <div class="step-row-label">6. 真ん中(10)を選択 → ヒント「▶」 (もっと後ろ)</div>
+    <div class="step-row">
+      <div class="box revealed excluded">1</div>
+      <div class="box revealed excluded">2</div>
+      <div class="box revealed excluded">3</div>
+      <div class="box revealed excluded">4</div>
+      <div class="box revealed excluded">5</div>
+      <div class="box revealed excluded">6</div>
+      <div class="box revealed excluded">7</div>
+      <div class="box revealed lose">▶</div>
+      <div class="box">9</div>
+      <div class="box revealed lose">▶</div> <div class="box">11</div>
+      <div class="box revealed lose">◀</div>
+      <div class="box revealed excluded">13</div>
+      <div class="box revealed excluded">14</div>
+      <div class="box revealed excluded">15</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="step-row-label">7. 範囲(9)を除外。 (次の範囲: 11〜11)</div>
+    <div class="step-row">
+      <div class="box revealed excluded">1</div>
+      <div class="box revealed excluded">2</div>
+      <div class="box revealed excluded">3</div>
+      <div class="box revealed excluded">4</div>
+      <div class="box revealed excluded">5</div>
+      <div class="box revealed excluded">6</div>
+      <div class="box revealed excluded">7</div>
+      <div class="box revealed lose">▶</div>
+      <div class="box revealed excluded">9</div> <div class="box revealed lose">▶</div>
+      <div class="box">11</div>
+      <div class="box revealed lose">◀</div>
+      <div class="box revealed excluded">13</div>
+      <div class="box revealed excluded">14</div>
+      <div class="box revealed excluded">15</div>
+    </div>
+  </div>
+  
+  <div>
+    <div class="step-row-label">8. 真ん中(11)を選択 → 「あたり」！</div>
+    <div class="step-row">
+      <div class="box revealed excluded">1</div>
+      <div class="box revealed excluded">2</div>
+      <div class="box revealed excluded">3</div>
+      <div class="box revealed excluded">4</div>
+      <div class="box revealed excluded">5</div>
+      <div class="box revealed excluded">6</div>
+      <div class="box revealed excluded">7</div>
+      <div class="box revealed lose">▶</div>
+      <div class="box revealed excluded">9</div>
+      <div class="box revealed lose">▶</div>
+      <div class="box revealed win">あたり</div> <div class="box revealed lose">◀</div>
+      <div class="box revealed excluded">13</div>
+      <div class="box revealed excluded">14</div>
+      <div class="box revealed excluded">15</div>
+    </div>
+  </div>
+
+</div>
     <div class="footer">
         <button onclick="location.href='search4.html'" class="btn">前ページ</button>
         <button disabled class="btn">次ページ</button>
