@@ -126,6 +126,43 @@ class BinaryGame extends Game {
             return "◀";
         }
     }
+    // --- 一撃成功をさせない処理 --- //
+    // handleBoxClick(i, box) {
+    //     // すでにめくられている場合は何もしない
+    //     if (box.classList.contains("revealed")) {
+    //         return;
+    //     }
+        
+    //     box.classList.add("revealed");
+    //     this.tryCount++; // 試行回数を増やす
+
+    //     // ★追加ロジック： 1回目のクリック (tryCountが1) で、
+    //     // かつ、当たり (i === winningBoxIndex) だった場合
+    //     if (this.tryCount === 1 && i === this.winningBoxIndex) {
+            
+    //         // 1回目で当たってしまったら、当たりを「隣のボックス」にこっそり移動させる
+    //         // (これで、今クリックした i は当たりではなくなる)
+    //         // (boxCountで割った余りを使うと、最後のボックスでも0番に戻れる)
+    //         this.winningBoxIndex = (this.winningBoxIndex + 1) % this.boxCount;
+
+    //         // ※もし移動先(i+1)もたまたまクリック済みだったら...という心配は不要
+    //         //   (1回目のクリックなので、i 以外は絶対にめくられていないため)
+    //     }
+
+    //     // --- ここからは、親クラス(Game)と全く同じ処理 ---
+    //     // (1回目の当たり判定は、上の処理で強制的にfalseにされている)
+
+    //     if (i === this.winningBoxIndex) {
+    //         // あたりの場合 (1回目はここには絶対に来ない)
+    //         box.textContent = "あたり";
+    //         box.classList.add("win");
+    //         this.endGame(); // ゲーム終了処理
+    //     } else {
+    //         // はずれの場合 (1回目は必ずここに来る)
+    //         box.textContent = this.getHintText(i);
+    //         box.classList.add("lose");
+    //     }
+    // }
 }
 
 // --- 線形探索のコード ---
@@ -340,14 +377,51 @@ class BinarySearchGame extends BinaryGame { // ★GameではなくBinaryGameを�
     }
 }
 
+// BinarySearchGameを継承し、答えを「11」(index 10)に固定したクラス
+class BinarySearchDefaultGame extends BinarySearchGame {
+
+    // --- setupGame を上書き(オーバーライド) ---
+    setupGame() {
+        // 親(BinarySearchGame)の setupGame のロジックをほぼコピー
+        this.gameBoard.innerHTML = "";
+        this.resetButton.disabled = true;
+        this.tryCount = 0;
+        
+        // ★★★ 変更点 ★★★
+        // 当たりをランダム(Math.random) ではなく 10 (表示上は11) に固定する
+        this.winningBoxIndex = 10; 
+
+        // (安全のため) もしボックス数が11未満なら、エラーを防ぐ
+        if (this.boxCount <= this.winningBoxIndex) {
+            console.warn(`BinarySearchDefaultGame: boxCount(${this.boxCount}) が 11 より少ないため、当たりを ${this.boxCount} (index ${this.boxCount - 1}) に変更します。`);
+            this.winningBoxIndex = this.boxCount - 1;
+        }
+
+        // 自動探索ボタンを有効化
+        if (this.autoSearchButton) {
+            this.autoSearchButton.disabled = false;
+        }
+
+        // (親クラスと同様のボックス生成)
+        for (let i = 0; i < this.boxCount; i++) {
+            const box = document.createElement("div");
+            box.classList.add("box");
+            box.textContent = i + 1;
+            // (クリックは無効化)
+            this.gameBoard.appendChild(box);
+        }
+    }
+}
+
 // --- ゲームのインスタンスを生成 ---
 const pageId = document.body.id;
 if (pageId === "search1") {
     game1 = new Game("game-board-1", "history-1", "game-info-1", 15);
 } else if (pageId === "search2") {
-    binaryGame = new Game("binary-game-board", "binary-history", "binary-game-info", 100);
+    game2 = new Game("game-board-2", "history-2", "game-info-2", 100);
 } else if (pageId === "search4") {
     game3 = new LinearSearchGame("game-board-3", "history-3", "game-info-3", 15);
 } else if (pageId === "search5") {
-    game3 = new BinarySearchGame("game-board-4", "history-4", "game-info-4", 15);
+    game4 = new BinaryGame("game-board-4", "history-4", "game-info-4", 15);
+    game5 = new BinarySearchDefaultGame("game-board-5", "history-5", "game-info-5", 15);
 }
