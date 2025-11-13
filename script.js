@@ -351,7 +351,7 @@ class BinarySearchGame extends BinaryGame { // ★GameではなくBinaryGameを�
             }
 
             // 除外処理が画面に反映された状態で、1秒待機
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await new Promise(resolve => setTimeout(resolve, 1000));
 
             // 待機が終わったら、次のループのために範囲を更新
             if (mid < this.winningBoxIndex) {
@@ -424,4 +424,7 @@ if (pageId === "search1") {
 } else if (pageId === "search5") {
     game4 = new BinaryGame("game-board-4", "history-4", "game-info-4", 15);
     game5 = new BinarySearchDefaultGame("game-board-5", "history-5", "game-info-5", 15);
+} else if (pageId === "search8") {
+    game6 = new LinearSearchGame("game-board-6", "history-6", "game-info-6", 15);
+    game7 = new BinarySearchGame("game-board-7", "history-7", "game-info-7", 15);
 }

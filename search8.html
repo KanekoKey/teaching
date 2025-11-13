@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>探索</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="search8">
+    <h1>アルゴリズムの評価</h1>
+
+    <h2>線形探索</h2>
+    <h3>最小探索回数... 1回</h3>
+    <h3>最大探索回数... n回</h3>
+    <h3>平均探索回数... <span style="display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center;">
+            <span style="padding: 0 10px; border-bottom: 1px solid #000000;">n+1</span>
+            <span style="padding: 0 10px;">2</span>
+        </span>回</h3>
+    
+    <h2>二分探索</h2>
+    <h3>最小探索回数... 1回</h3>
+    <h3>最大探索回数... [log₂n]+1回</h3>
+    <h3>平均探索回数... [log₂n]回</h3>
+    <table>
+
+    <h3 style="margin-top: 50px;">線形探索</h3>
+    <div id="game-board-6" class="game-board"></div>
+    <btn id="game-info-6" class="game-info">
+        <button class="game-score">Score: 0</button>
+        <button class="btn linear-button">線形探索実行</button>
+        <button class="btn reset-button">もう一度</button>
+        </div>
+    </btn>
+    <div id="history-6" class="history">
+        <details>
+            <summary>スコア詳細</summary>
+            <div>
+                　最大スコア: <span class="max-try">0</span>
+                　最小スコア: <span class="min-try">0</span>
+                　平均スコア: <span class="avg-try">0</span></div>
+            <div>　スコア履歴:</div>
+            <ul class="history-list"></ul>
+        </details>
+    </div>
+
+    <h3 style="margin-top: 50px;">二分探索</h3>
+    <div id="game-board-7" class="game-board"></div>
+    <btn id="game-info-7" class="game-info">
+        <button class="game-score">Score: 0</button>
+        <button class="btn binary-button">二分探索実行</button>
+        <button class="btn reset-button">もう一度</button>
+        </div>
+    </btn>
+    <div id="history-7" class="history">
+        <details>
+            <summary>スコア詳細</summary>
+            <div>
+                　最大スコア: <span class="max-try">0</span>
+                　最小スコア: <span class="min-try">0</span>
+                　平均スコア: <span class="avg-try">0</span></div>
+            <div>　スコア履歴:</div>
+            <ul class="history-list"></ul>
+        </details>
+    </div>
+
+    <div class="footer">
+        <button onclick="location.href='search7.html'" class="btn">前ページ</button>
+        <button disabled class="btn">次ページ</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
