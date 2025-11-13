@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>探索</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="search7">
+
+    <h1>二分探索の探索回数(データ数=n)</h1>
+
+    <h3>最小探索回数... 1回</h3>
+    <div class="step-row">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+        <div class="box">6</div>
+        <div class="box">7</div>
+        <div class="box revealed win">あたり</div>
+        <div class="box">9</div>
+        <div class="box">10</div>
+        <div class="box">11</div>
+        <div class="box">12</div>
+        <div class="box">13</div>
+        <div class="box">14</div>
+        <div class="box">15</div>
+    </div>
+    <h3>最大探索回数... [log₂n]+1回</h3>
+    <p>n=2<sup>x</sup>のようにデータ数nが2の自然数乗で表現できる場合、</p>
+    <p>探索範囲のデータ数は、n=2<sup>x</sup>, n=2<sup>x-1</sup>, ···, n=2<sup>1</sup>, n=2<sup>0</sup> と毎回半分ずつ減っていく</p>
+    <p>例えば、n=8=2<sup>3</sup>の場合は、下の図のように半減して、最大探索回数は4回になる。</p>
+    <div class="search-steps">
+        <div class="step-row-label">1回目... 8(=2<sup>3</sup>)</div>
+        <div class="step-row">
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+            <div class="box">4</div>
+            <div class="box">5</div>
+            <div class="box">6</div>
+            <div class="box">7</div>
+            <div class="box">8</div>
+        </div>
+        <div class="step-row-label">2回目... 4(=2<sup>2</sup>)</div>
+        <div class="step-row">
+            <div class="box revealed excluded">1</div>
+            <div class="box revealed excluded">2</div>
+            <div class="box revealed excluded">3</div>
+            <div class="box revealed lose">▶</div>
+            <div class="box">5</div>
+            <div class="box">6</div>
+            <div class="box">7</div>
+            <div class="box">8</div>
+        </div>
+        <div class="step-row-label">3回目... 4(=2<sup>1</sup>)</div>
+        <div class="step-row">
+            <div class="box revealed excluded">1</div>
+            <div class="box revealed excluded">2</div>
+            <div class="box revealed excluded">3</div>
+            <div class="box revealed excluded">4</div>
+            <div class="box revealed excluded">5</div>
+            <div class="box revealed lose">▶</div>
+            <div class="box">7</div>
+            <div class="box">8</div>
+        </div>
+        <div class="step-row-label">4回目... 4(=2<sup>0</sup>)</div>
+        <div class="step-row">
+            <div class="box revealed excluded">1</div>
+            <div class="box revealed excluded">2</div>
+            <div class="box revealed excluded">3</div>
+            <div class="box revealed excluded">4</div>
+            <div class="box revealed excluded">5</div>
+            <div class="box revealed excluded">6</div>
+            <div class="box revealed lose">▶</div>
+            <div class="box">8</div>
+        </div>
+    </div>
+    <p>よって、n=2<sup>x</sup>の時、最大探索回数は (x+1)回 となり、</p>
+    <p>最大探索回数は (log₂n)+1回 と表せる。</p>
+    <p>　※2<sup>a</sup>=bの時、aをbの2の対数といい、a=log₂bと表す。</p>
+    <p>2の自然数乗で表現できない場合を考慮してガウス記号を用いて最大探索回数は、[log₂n]+1 回 と表す。</p>
+    <p>　([x]は実数xを超えない最大の整数)</p>
+
+    <h3>平均探索回数... [log₂n]回</h3>
+    <p>平均探索回数 = <span style="display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center;">
+            <span style="padding: 0 10px; border-bottom: 1px solid #000000;">最小探索回数 + 最大探索回数</span>
+            <span style="padding: 0 10px;">2</span>
+        </span> = <span style="display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center;">
+            <span style="padding: 0 10px; border-bottom: 1px solid #000000;">1 + [log₂n]+1</span>
+            <span style="padding: 0 10px;">2</span>
+        </span> = [log₂n]</p>
+    <p>　(詳しい計算は数学Ⅱで)</p>
+
+
+    <div class="footer">
+        <button onclick="location.href='search6.html'" class="btn">前ページ</button>
+        <button onclick="location.href='search8.html'" class="btn">次ページ</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>

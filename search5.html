@@ -14,17 +14,34 @@
         <h2>　　探索範囲を半分に狭めることを繰り返して探索値を絞り込んでいくアルゴリズム</h2>
     </div>
 
-    <h3 style="margin-top: 50px;">まずは、二分探索が行われる様子を見てみよう</h3>
+    <h3 style="margin-top: 50px;">前提条件... 「あたり」がめくった場所の前後どちらにあるかが分かること</h3>
     <div id="game-board-4" class="game-board"></div>
-
     <btn id="game-info-4" class="game-info">
+        <button class="game-score" style="display: none;">Score: 0</button>
+        <button class="btn reset-button">もう一度</button>
+        </div>
+    </btn>
+    <div id="history-4" class="history" style="display: none;">
+        <details>
+            <summary>スコア詳細</summary>
+            <div>
+                　最大スコア: <span class="max-try">0</span>
+                　最小スコア: <span class="min-try">0</span>
+                　平均スコア: <span class="avg-try">0</span></div>
+            <div>　スコア履歴:</div>
+            <ul class="history-list"></ul>
+        </details>
+    </div>
+
+    <h3 style="margin-top: 50px;">二分探索が行われる様子を見てみよう</h3>
+    <div id="game-board-5" class="game-board"></div>
+    <btn id="game-info-5" class="game-info">
         <button class="game-score">Score: 0</button>
         <button class="btn binary-button">二分探索実行</button>
         <button class="btn reset-button">もう一度</button>
         </div>
     </btn>
-
-    <div id="history-4" class="history">
+    <div id="history-5" class="history" style="display: none;">
         <details>
             <summary>スコア詳細</summary>
             <div>
@@ -40,8 +57,8 @@
         <div>
             <h3>二分探索の方法</h3>
             <p>1. 探索範囲の中央値と探索値を比較する</p>
-            <p>2-A. 探索値が中央値より小さい場合　->　中央値から大きい部分を除外する</ｐ>
-            <p>2-B. 探索値が中央値より大きい場合　->　中央値から小さい部分を除外する</p>
+            <p>2-A. 探索値が中央値より前にある場合　->　中央値から後ろの部分を除外する</ｐ>
+            <p>2-B. 探索値が中央値より後ろにある場合　->　中央値から前の部分を除外する</p>
             <p>3. 以上を当たるまで繰り返す</p>
         </div>
         <div>
@@ -82,7 +99,8 @@
       <div class="box">5</div>
       <div class="box">6</div>
       <div class="box">7</div>
-      <div class="box revealed lose">▶</div> <div class="box">9</div>
+      <div class="box revealed lose">▶</div>
+      <div class="box">9</div>
       <div class="box">10</div>
       <div class="box">11</div>
       <div class="box">12</div>
@@ -95,7 +113,14 @@
   <div>
     <div class="step-row-label">3. 範囲(1〜7)を除外。 (次の範囲: 9〜15)</div>
     <div class="step-row">
-      <div class="box revealed excluded">1</div> <div class="box revealed excluded">2</div> <div class="box revealed excluded">3</div> <div class="box revealed excluded">4</div> <div class="box revealed excluded">5</div> <div class="box revealed excluded">6</div> <div class="box revealed excluded">7</div> <div class="box revealed lose">▶</div>
+      <div class="box revealed excluded">1</div>
+      <div class="box revealed excluded">2</div>
+      <div class="box revealed excluded">3</div>
+      <div class="box revealed excluded">4</div>
+      <div class="box revealed excluded">5</div>
+      <div class="box revealed excluded">6</div>
+      <div class="box revealed excluded">7</div>
+      <div class="box revealed lose">▶</div>
       <div class="box">9</div>
       <div class="box">10</div>
       <div class="box">11</div>
@@ -120,7 +145,8 @@
       <div class="box">9</div>
       <div class="box">10</div>
       <div class="box">11</div>
-      <div class="box revealed lose">◀</div> <div class="box">13</div>
+      <div class="box revealed lose">◀</div>
+      <div class="box">13</div>
       <div class="box">14</div>
       <div class="box">15</div>
     </div>
@@ -141,7 +167,10 @@
       <div class="box">10</div>
       <div class="box">11</div>
       <div class="box revealed lose">◀</div>
-      <div class="box revealed excluded">13</div> <div class="box revealed excluded">14</div> <div class="box revealed excluded">15</div> </div>
+      <div class="box revealed excluded">13</div>
+      <div class="box revealed excluded">14</div>
+      <div class="box revealed excluded">15</div>
+    </div>
   </div>
 
   <div>
@@ -156,7 +185,8 @@
       <div class="box revealed excluded">7</div>
       <div class="box revealed lose">▶</div>
       <div class="box">9</div>
-      <div class="box revealed lose">▶</div> <div class="box">11</div>
+      <div class="box revealed lose">▶</div>
+      <div class="box">11</div>
       <div class="box revealed lose">◀</div>
       <div class="box revealed excluded">13</div>
       <div class="box revealed excluded">14</div>
@@ -175,7 +205,8 @@
       <div class="box revealed excluded">6</div>
       <div class="box revealed excluded">7</div>
       <div class="box revealed lose">▶</div>
-      <div class="box revealed excluded">9</div> <div class="box revealed lose">▶</div>
+      <div class="box revealed excluded">9</div>
+      <div class="box revealed lose">▶</div>
       <div class="box">11</div>
       <div class="box revealed lose">◀</div>
       <div class="box revealed excluded">13</div>
@@ -197,7 +228,8 @@
       <div class="box revealed lose">▶</div>
       <div class="box revealed excluded">9</div>
       <div class="box revealed lose">▶</div>
-      <div class="box revealed win">あたり</div> <div class="box revealed lose">◀</div>
+      <div class="box revealed win">あたり</div>
+      <div class="box revealed lose">◀</div>
       <div class="box revealed excluded">13</div>
       <div class="box revealed excluded">14</div>
       <div class="box revealed excluded">15</div>
@@ -207,7 +239,7 @@
 </div>
     <div class="footer">
         <button onclick="location.href='search4.html'" class="btn">前ページ</button>
-        <button disabled class="btn">次ページ</button>
+        <button onclick="location.href='search6.html'" class="btn">次ページ</button>
     </div>
 
     <script src="script.js"></script>
