@@ -11,7 +11,7 @@
 
     <h1>二分探索の探索回数(データ数=n)</h1>
 
-    <h3>最小探索回数... 1回</h3>
+    <h3 style="margin-top: 50px;">最小探索回数... 1回</h3>
     <div class="step-row">
         <div class="box">1</div>
         <div class="box">2</div>
@@ -29,7 +29,7 @@
         <div class="box">14</div>
         <div class="box">15</div>
     </div>
-    <h3>最大探索回数... [log₂n]+1回</h3>
+    <h3 style="margin-top: 50px;">最大探索回数... [log₂n]+1回</h3>
     <p>n=2<sup>x</sup>のようにデータ数nが2の自然数乗で表現できる場合、</p>
     <p>探索範囲のデータ数は、n=2<sup>x</sup>, n=2<sup>x-1</sup>, ···, n=2<sup>1</sup>, n=2<sup>0</sup> と毎回半分ずつ減っていく</p>
     <p>例えば、n=8=2<sup>3</sup>の場合は、下の図のように半減して、最大探索回数は4回になる。</p>
@@ -85,14 +85,7 @@
     <p>2の自然数乗で表現できない場合を考慮してガウス記号を用いて最大探索回数は、[log₂n]+1 回 と表す。</p>
     <p>　([x]は実数xを超えない最大の整数)</p>
 
-    <h3>平均探索回数... [log₂n]回</h3>
-    <p>平均探索回数 = <span style="display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center;">
-            <span style="padding: 0 10px; border-bottom: 1px solid #000000;">最小探索回数 + 最大探索回数</span>
-            <span style="padding: 0 10px;">2</span>
-        </span> = <span style="display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center;">
-            <span style="padding: 0 10px; border-bottom: 1px solid #000000;">1 + [log₂n]+1</span>
-            <span style="padding: 0 10px;">2</span>
-        </span> = [log₂n]</p>
+    <h3 style="margin-top: 50px;">平均探索回数... [log₂n]回</h3>
     <p>　(詳しい計算は数学Ⅱで)</p>
 
 
