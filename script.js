@@ -56,7 +56,7 @@ class Game {
         if (box.classList.contains("revealed")) {
             return;
         }
-        
+
         box.classList.add("revealed");
         this.tryCount++; // 試行回数を増やす
 
@@ -107,12 +107,34 @@ class Game {
         this.history.querySelector(".max-try").textContent = this.maxTryCount;
         this.history.querySelector(".min-try").textContent = this.minTryCount === Infinity ? 0 : this.minTryCount;
         this.history.querySelector(".avg-try").textContent = this.totalScore ? (this.totalScore / this.playCount).toFixed(2) : 0;
+        this.history.querySelector(".play-count").textContent = this.playCount;
     }
 
     updateHistoryList() {
         const li = document.createElement("li");
         li.textContent = `Score: ${this.tryCount}`;
         this.historyList.insertBefore(li, this.historyList.firstChild);
+    }
+
+    updateBoxCount(newCount) {
+        // 数値を更新
+        this.boxCount = newCount;
+
+        // 統計情報をリセット
+        this.playCount = 0;
+        this.tryCount = 0;
+        this.totalScore = 0;
+        this.minTryCount = Infinity;
+        this.maxTryCount = 0;
+
+        // 履歴表示をクリア
+        if (this.historyList) {
+            this.historyList.innerHTML = "";
+        }
+        this.updateStats();
+
+        // ゲーム盤面を作り直す
+        this.setupGame();
     }
 }
 
@@ -132,14 +154,14 @@ class BinaryGame extends Game {
     //     if (box.classList.contains("revealed")) {
     //         return;
     //     }
-        
+
     //     box.classList.add("revealed");
     //     this.tryCount++; // 試行回数を増やす
 
     //     // ★追加ロジック： 1回目のクリック (tryCountが1) で、
     //     // かつ、当たり (i === winningBoxIndex) だった場合
     //     if (this.tryCount === 1 && i === this.winningBoxIndex) {
-            
+
     //         // 1回目で当たってしまったら、当たりを「隣のボックス」にこっそり移動させる
     //         // (これで、今クリックした i は当たりではなくなる)
     //         // (boxCountで割った余りを使うと、最後のボックスでも0番に戻れる)
@@ -198,11 +220,11 @@ class LinearSearchGame extends Game {
             const box = document.createElement("div");
             box.classList.add("box");
             box.textContent = i + 1;
-            
+
             // ★★★ 親と違う点 ★★★
             // box.addEventListener を実行しない
             // これにより、個別のボックスをクリックできなくする
-            
+
             this.gameBoard.appendChild(box);
         }
     }
@@ -220,7 +242,7 @@ class LinearSearchGame extends Game {
 
         for (let i = 0; i < this.boxCount; i++) {
             const box = boxes[i];
-            
+
             // 親クラスの「ボックスをめくる」処理を呼び出す
             this.handleBoxClick(i, box);
 
@@ -255,7 +277,7 @@ class LinearSearchGame extends Game {
 
 // --- 二分探索のコード ---
 class BinarySearchGame extends BinaryGame { // ★GameではなくBinaryGameを継承
-    
+
     constructor(gameBoardId, historyId, gameInfoId, boxCount) {
         // 親クラス(BinaryGame)の constructor を実行
         super(gameBoardId, historyId, gameInfoId, boxCount);
@@ -286,10 +308,10 @@ class BinarySearchGame extends BinaryGame { // ★GameではなくBinaryGameを�
             const box = document.createElement("div");
             box.classList.add("box");
             box.textContent = i + 1;
-            
+
             // ★★★ 親と違う点 ★★★
             // box.addEventListener を実行せず、手動クリックを無効化
-            
+
             this.gameBoard.appendChild(box);
         }
     }
@@ -330,7 +352,7 @@ class BinarySearchGame extends BinaryGame { // ★GameではなくBinaryGameを�
         while (low <= high) {
             // 真ん中のインデックスを計算
             const mid = Math.floor((low + high) / 2);
-            
+
             const box = boxes[mid];
 
             // 親クラスの「ボックスをめくる」処理を呼び出す
@@ -362,7 +384,7 @@ class BinarySearchGame extends BinaryGame { // ★GameではなくBinaryGameを�
                 high = mid - 1; // 範囲の上限を mid の前 にする
             }
         }
-        
+
         // ループが終わったらリセットボタンを有効化 (念のため)
         this.resetButton.disabled = false;
     }
@@ -386,10 +408,10 @@ class BinarySearchDefaultGame extends BinarySearchGame {
         this.gameBoard.innerHTML = "";
         this.resetButton.disabled = true;
         this.tryCount = 0;
-        
+
         // ★★★ 変更点 ★★★
         // 当たりをランダム(Math.random) ではなく 10 (表示上は11) に固定する
-        this.winningBoxIndex = 10; 
+        this.winningBoxIndex = 10;
 
         // (安全のため) もしボックス数が11未満なら、エラーを防ぐ
         if (this.boxCount <= this.winningBoxIndex) {
@@ -425,6 +447,33 @@ if (pageId === "search1") {
     game4 = new BinaryGame("game-board-4", "history-4", "game-info-4", 15);
     game5 = new BinarySearchDefaultGame("game-board-5", "history-5", "game-info-5", 15);
 } else if (pageId === "search8") {
-    game6 = new LinearSearchGame("game-board-6", "history-6", "game-info-6", 15);
-    game7 = new BinarySearchGame("game-board-7", "history-7", "game-info-7", 15);
+    const num_6 = parseInt(document.getElementById("game-num-6").value, 15);
+    const reloadBtn_6 = document.getElementById("reload-btn-6");
+    game6 = new LinearSearchGame("game-board-6", "history-6", "game-info-6", num_6);
+    if (reloadBtn_6) {
+        reloadBtn_6.addEventListener("click", () => {
+            const newNum_6 = parseInt(document.getElementById("game-num-6").value, 15);
+
+            if (!isNaN(newNum_6) && newNum_6 > 0) {
+                game6.updateBoxCount(newNum_6);
+            } else {
+                alert("1以上の正しい数字を入力してください");
+            }
+        });
+    }
+
+    const num_7 = parseInt(document.getElementById("game-num-7").value, 15);
+    const reloadBtn_7 = document.getElementById("reload-btn-7");
+    game7 = new BinarySearchGame("game-board-7", "history-7", "game-info-7", num_7);
+    if (reloadBtn_7) {
+        reloadBtn_7.addEventListener("click", () => {
+            const newNum_7 = parseInt(document.getElementById("game-num-7").value, 15);
+
+            if (!isNaN(newNum_7) && newNum_7 > 0) {
+                game7.updateBoxCount(newNum_7);
+            } else {
+                alert("1以上の正しい数字を入力してください");
+            }
+        });
+    }
 }
