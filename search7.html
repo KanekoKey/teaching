@@ -29,65 +29,29 @@
         <div class="box">14</div>
         <div class="box">15</div>
     </div>
+
     <h3 style="margin-top: 50px;">最大探索回数... [log₂n]+1回</h3>
-    <p>n=2<sup>x</sup>のようにデータ数nが2の自然数乗で表現できる場合、</p>
-    <p>探索範囲のデータ数は、n=2<sup>x</sup>, n=2<sup>x-1</sup>, ···, n=2<sup>1</sup>, n=2<sup>0</sup> と毎回半分ずつ減っていく</p>
-    <p>例えば、n=8=2<sup>3</sup>の場合は、下の図のように半減して、最大探索回数は4回になる。</p>
-    <div class="search-steps">
-        <div class="step-row-label">1回目... 8(=2<sup>3</sup>)</div>
-        <div class="step-row">
-            <div class="box">1</div>
-            <div class="box">2</div>
-            <div class="box">3</div>
-            <div class="box">4</div>
-            <div class="box">5</div>
-            <div class="box">6</div>
-            <div class="box">7</div>
-            <div class="box">8</div>
-        </div>
-        <div class="step-row-label">2回目... 4(=2<sup>2</sup>)</div>
-        <div class="step-row">
-            <div class="box revealed excluded">1</div>
-            <div class="box revealed excluded">2</div>
-            <div class="box revealed excluded">3</div>
-            <div class="box revealed lose">▶</div>
-            <div class="box">5</div>
-            <div class="box">6</div>
-            <div class="box">7</div>
-            <div class="box">8</div>
-        </div>
-        <div class="step-row-label">3回目... 4(=2<sup>1</sup>)</div>
-        <div class="step-row">
-            <div class="box revealed excluded">1</div>
-            <div class="box revealed excluded">2</div>
-            <div class="box revealed excluded">3</div>
-            <div class="box revealed excluded">4</div>
-            <div class="box revealed excluded">5</div>
-            <div class="box revealed lose">▶</div>
-            <div class="box">7</div>
-            <div class="box">8</div>
-        </div>
-        <div class="step-row-label">4回目... 4(=2<sup>0</sup>)</div>
-        <div class="step-row">
-            <div class="box revealed excluded">1</div>
-            <div class="box revealed excluded">2</div>
-            <div class="box revealed excluded">3</div>
-            <div class="box revealed excluded">4</div>
-            <div class="box revealed excluded">5</div>
-            <div class="box revealed excluded">6</div>
-            <div class="box revealed lose">▶</div>
-            <div class="box">8</div>
-        </div>
-    </div>
-    <p>よって、n=2<sup>x</sup>の時、最大探索回数は (x+1)回 となり、</p>
     <p>最大探索回数は (log₂n)+1回 と表せる。</p>
-    <p>　※2<sup>a</sup>=bの時、aをbの2の対数といい、a=log₂bと表す。</p>
+    <p>　※2<sup>a</sup>=bの時、aをbの2の対数といい、a=log₂bと表す。(対数については数Ⅱで詳しく学習します)</p>
     <p>2の自然数乗で表現できない場合を考慮してガウス記号を用いて最大探索回数は、[log₂n]+1 回 と表す。</p>
-    <p>　([x]は実数xを超えない最大の整数)</p>
+    <p>　([x]は実数xを超えない最大の整数、切り捨て)</p>
+    <div class="slider-container">
+        <img id="slideImage" class="slide-img" src="" alt="">
 
+        <button class="slide-btn prev" id="btnPrev">❮</button>
+        <button class="slide-btn next" id="btnNext">❯</button>
+    </div>
+    <p>log₂nは、二分木の「深さ」にあたる</p>
+    <p style="margin-top: 50px;">log₂n計算機</p>
+    <div style="font-family: monospace; font-size: 1.2rem;">
+        log<sub>2</sub>
+        <input type="number" id="targetNum" style="font-size: 1.2rem; width: 100px; padding: 4px;" placeholder="N">
+        =
+        <span id="logResult" style="font-weight: bold; color: black;">---</span>
+    </div>
     <h3 style="margin-top: 50px;">平均探索回数... [log₂n]回</h3>
-    <p>　(詳しい計算は数学Ⅱで)</p>
 
+    <p>　導出は省略</p>
 
     <div class="footer">
         <button onclick="location.href='search6.html'" class="btn">前ページ</button>
@@ -96,3 +60,62 @@
 
     <script src="script.js"></script>
 </body>
+
+<script>
+    // 画像パスのリスト
+    const images = [
+        'binary-tree/tree_1.png',
+        'binary-tree/tree_2.png',
+        'binary-tree/tree_3.png',
+        'binary-tree/tree_4.png',
+        'binary-tree/tree_5.png',
+        'binary-tree/tree_6.png',
+        'binary-tree/tree_7.png',
+        'binary-tree/tree_8.png',
+    ];
+
+    let currentIndex = 0;
+    const slideImage = document.getElementById('slideImage');
+    const currentNum = 1;
+    const totalNum = 8;
+
+    // 初期表示
+    function updateImage() {
+        slideImage.src = images[currentIndex];
+        currentNum.textContent = currentIndex + 1;
+    }
+
+    totalNum.textContent = images.length;
+    updateImage();
+
+    // 次へボタン
+    document.getElementById('btnNext').addEventListener('click', () => {
+        currentIndex++;
+        if (currentIndex >= images.length) {
+            currentIndex = 0; // 最後まで行ったら最初に戻る
+        }
+        updateImage();
+    });
+
+    // 前へボタン
+    document.getElementById('btnPrev').addEventListener('click', () => {
+        currentIndex--;
+        if (currentIndex < 0) {
+            currentIndex = images.length - 1; // 最初より前に行ったら最後に戻る
+        }
+        updateImage();
+    });
+
+
+    document.getElementById('targetNum').addEventListener('input', function (e) {
+        const n = parseFloat(e.target.value);
+        const output = document.getElementById('logResult');
+
+        // 正の数の場合のみ計算して小数点第3位まで表示
+        if (!isNaN(n) && n > 0) {
+            output.textContent = Math.log2(n).toFixed(3);
+        } else {
+            output.textContent = "---";
+        }
+    });
+</script>
