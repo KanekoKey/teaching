@@ -29,68 +29,11 @@
         </div>
     </div>
 
-
-
-    <h2 style="margin-top: 50px;">比較してみよう</h2>
-    <p>「スコア詳細」を開いて、最少スコア(最小探索回数)、最大スコア(最大探索回数)、平均スコア(平均探索回数)を比較してみよう</p>
-    <h3 style="margin-top: 50px;">線形探索</h3>
-    <div id="game-board-6" class="game-board"></div>
-    <btn id="game-info-6" class="game-info">
-        <button class="game-score">Score: 0</button>
-        <button class="btn linear-button">線形探索実行</button>
-        <button class="btn reset-button">もう一度</button>
-        <input id="game-num-6" type="number" name="userNumber" min="1" max="100" value="15" placeholder="例: 15" required style="margin-left: 50px;">
-        <button id="reload-btn-6">確定</button>
-    </btn>
-    <div id="history-6" class="history">
-        <details>
-            <summary>スコア詳細</summary>
-            <div>
-                　挑戦回数: <span class="play-count">0</span>
-                　最小スコア: <span class="min-try">0</span>
-                　最大スコア: <span class="max-try">0</span>
-                　平均スコア: <span class="avg-try">0</span></div>
-            <div>　スコア履歴:</div>
-            <ul class="history-list"></ul>
-        </details>
-    </div>
-
-    <h3 style="margin-top: 50px;">二分探索</h3>
-    <div id="game-board-7" class="game-board"></div>
-    <btn id="game-info-7" class="game-info">
-        <button class="game-score">Score: 0</button>
-        <button class="btn binary-button">二分探索実行</button>
-        <button class="btn reset-button">もう一度</button>
-        <input id="game-num-7" type="number" name="userNumber" min="1" max="100" value="15" placeholder="例: 15" required style="margin-left: 50px;">
-        <button id="reload-btn-7">確定</button>
-    </btn>
-    <div id="history-7" class="history">
-        <details>
-            <summary>スコア詳細</summary>
-            <div>
-                　挑戦回数: <span class="play-count">0</span>
-                　最小スコア: <span class="min-try">0</span>
-                　最大スコア: <span class="max-try">0</span>
-                　平均スコア: <span class="avg-try">0</span></div>
-            <div>　スコア履歴:</div>
-            <ul class="history-list"></ul>
-        </details>
-    </div>
-    <p style="margin-top: 50px;">log₂n計算機</p>
-    <div style="font-family: monospace; font-size: 1.2rem;">
-        log<sub>2</sub>
-        <input type="number" id="targetNum" style="font-size: 1.2rem; width: 100px; padding: 4px;" placeholder="N">
-        =
-        <span id="logResult" style="font-weight: bold; color: black;">---</span>
-    </div>
-    <h3 style="margin-top: 50px;">平均探索回数... [log₂n]回</h3>
-    <button onclick="window.open('https://forms.gle/jEZr2ddFB1RgSiPPA', '_blank')" style="font-size: large;">
-        本日の課題
-    </button>
+    <img src="graph.png" alt="" style="display: block; margin: 40px auto 0 auto; width: 60%; border: solid 3px #000000;">
 
     <div class="footer">
         <button onclick="location.href='search7.html'" class="btn">前ページ</button>
-        <button disabled class="btn">次ページ</button>
+        <button onclick="location.href='search9.html'" class="btn">次ページ</button>
     </div>
 
     <script src="script.js"></script>
