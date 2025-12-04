@@ -446,13 +446,13 @@ if (pageId === "search1") {
 } else if (pageId === "search5") {
     game4 = new BinaryGame("game-board-4", "history-4", "game-info-4", 15);
     game5 = new BinarySearchDefaultGame("game-board-5", "history-5", "game-info-5", 15);
-} else if (pageId === "search8") {
-    const num_6 = parseInt(document.getElementById("game-num-6").value, 15);
+} else if (pageId === "search9") {
+    const num_6 = parseInt(document.getElementById("game-num-6").value, 10);
     const reloadBtn_6 = document.getElementById("reload-btn-6");
     game6 = new LinearSearchGame("game-board-6", "history-6", "game-info-6", num_6);
     if (reloadBtn_6) {
         reloadBtn_6.addEventListener("click", () => {
-            const newNum_6 = parseInt(document.getElementById("game-num-6").value, 15);
+            const newNum_6 = parseInt(document.getElementById("game-num-6").value, 10);
 
             if (!isNaN(newNum_6) && newNum_6 > 0) {
                 game6.updateBoxCount(newNum_6);
@@ -462,12 +462,12 @@ if (pageId === "search1") {
         });
     }
 
-    const num_7 = parseInt(document.getElementById("game-num-7").value, 15);
+    const num_7 = parseInt(document.getElementById("game-num-7").value, 10);
     const reloadBtn_7 = document.getElementById("reload-btn-7");
     game7 = new BinarySearchGame("game-board-7", "history-7", "game-info-7", num_7);
     if (reloadBtn_7) {
         reloadBtn_7.addEventListener("click", () => {
-            const newNum_7 = parseInt(document.getElementById("game-num-7").value, 15);
+            const newNum_7 = parseInt(document.getElementById("game-num-7").value, 10);
 
             if (!isNaN(newNum_7) && newNum_7 > 0) {
                 game7.updateBoxCount(newNum_7);
